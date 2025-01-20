@@ -79,7 +79,7 @@ resource "aws_lambda_function" "this" {
 
 #API Gateway
 data "template_file" "apigw_oas" {
-  template = file("./openapi-template.json")
+  template = file("openapi-template.json")
 
   vars = {
     lambda_arn = aws_lambda_function.this.arn
@@ -209,12 +209,4 @@ resource "aws_sns_topic_subscription" "email_subscription" {
   topic_arn = aws_sns_topic.sns_topic.arn
   protocol  = "email"
   endpoint  = "con3rasjf@gmail.com"
-}
-
-resource "aws_lambda_permission" "allow_lambda_publish_sns" {
-  statement_id  = "AllowLambdaPublishSNS"
-  action        = "sns:Publish"
-  function_name = aws_lambda_function.this.function_name
-  principal     = "sns.amazonaws.com"
-  source_arn    = aws_sns_topic.sns_topic.arn
 }
