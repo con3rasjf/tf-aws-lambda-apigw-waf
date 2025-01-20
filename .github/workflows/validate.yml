@@ -1,0 +1,27 @@
+name: Validate module
+
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: hashicorp/setup-terraform@v2
+        with:
+            terraform_version: "1.7.5"
+            terraform_wrapper: true         
+      - name: Terraform format
+        run: terraform fmt -check -recursive
+      - name: Terraform init
+        run: terraform init
+      - name: Terraform validate
+        run: terraform validate
+          
+     
