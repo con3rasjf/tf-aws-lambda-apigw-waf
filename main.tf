@@ -77,6 +77,16 @@ resource "aws_lambda_function" "this" {
 
 }
 
+#Log group
+resource "aws_cloudwatch_log_group" "this" {
+  name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
+  retention_in_days = "14"
+}
+resource "aws_iam_role_policy_attachment" "attach_logs_policy" {
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = aws_iam_policy.cloudwatch_logs_policy.arn
+}
+
 #API Gateway
 data "template_file" "apigw_oas" {
   template = file("${path.module}/openapi-template.json")
