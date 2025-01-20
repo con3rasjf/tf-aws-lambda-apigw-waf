@@ -165,7 +165,7 @@ resource "aws_api_gateway_authorizer" "cognito_authorizer" {
   name                             = "zulu_authorizer"
   rest_api_id                      = aws_api_gateway_rest_api.api_gateway.id
   type                             = "COGNITO_USER_POOLS"
-  provider_arns                    = [aws_cognito_user_pool.user_pool.id]
+  provider_arns                    = ["${aws_cognito_user_pool.user_pool.arn}"]
   identity_source                  = "method.request.header.Authorization"
   authorizer_result_ttl_in_seconds = "300"
 }
