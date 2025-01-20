@@ -79,7 +79,7 @@ resource "aws_lambda_function" "this" {
 
 #API Gateway
 data "template_file" "apigw_oas" {
-  template = file("openapi-template.json")
+  template = file("${path.module}/openapi-template.json")
 
   vars = {
     lambda_arn = aws_lambda_function.this.arn
@@ -103,7 +103,6 @@ resource "aws_lambda_permission" "api_gateway_invoke" {
 resource "aws_api_gateway_deployment" "api_deployment" {
   depends_on  = [aws_api_gateway_rest_api.api_gateway]
   rest_api_id = aws_api_gateway_rest_api.api_gateway.id
-  stage_name  = "test"
 }
 
 resource "aws_api_gateway_stage" "api_stage" {
