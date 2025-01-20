@@ -52,7 +52,7 @@ resource "aws_lambda_function" "this" {
   handler          = "index.lambda_handler"
   runtime          = var.runtime
   source_code_hash = filebase64sha256(local.filename)
-  role             = aws_iam_role.iam_for_lambda.arn
+  role             = aws_iam_role.lambda_role.arn
   description      = var.description
   memory_size      = var.memory_size
   timeout          = "30"
