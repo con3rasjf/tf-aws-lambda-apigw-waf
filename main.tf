@@ -43,7 +43,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
 
 data "archive_file" "lambda" {
   type        = "zip"
-  source_file = "index.py"
+  source_file = "${path.module}/index.py"
   output_path = "payload.zip"
 }
 
