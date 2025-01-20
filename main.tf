@@ -115,8 +115,8 @@ resource "aws_api_gateway_stage" "api_stage" {
 # WAF Web ACL
 resource "aws_wafv2_web_acl" "web_acl" {
   name        = "rate-based-example"
-  description = "Example of a Cloudfront rate based statement."
-  scope       = "CLOUDFRONT"
+  description = "ACL para limitar solicitudes por IP"
+  scope       = "REGIONAL"
 
   default_action {
     allow {}
