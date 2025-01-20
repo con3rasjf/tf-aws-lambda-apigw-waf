@@ -70,7 +70,6 @@ resource "aws_lambda_function" "this" {
   lifecycle {
     ignore_changes = [
       handler,
-      environment,
       runtime
     ]
   }
@@ -232,5 +231,5 @@ resource "aws_sns_topic" "sns_topic" {
 resource "aws_sns_topic_subscription" "email_subscription" {
   topic_arn = aws_sns_topic.sns_topic.arn
   protocol  = "email"
-  endpoint  = "con3rasjf@gmail.com"
+  endpoint  = var.email_receiver
 }
