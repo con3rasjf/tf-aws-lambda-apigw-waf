@@ -212,7 +212,7 @@ resource "aws_cognito_user_pool_client" "app_client" {
   user_pool_id                 = aws_cognito_user_pool.user_pool.id
   generate_secret              = true
   supported_identity_providers = ["COGNITO"]
-  explicit_auth_flows          = ["ALLOW_USER_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH"]
+  explicit_auth_flows          = ["ALLOW_USER_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH","ALLOW_REFRESH_TOKEN_AUTH"]
 
   access_token_validity  = 60
   id_token_validity      = 60
