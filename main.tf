@@ -48,7 +48,6 @@ resource "aws_iam_role_policy" "lambda_policy" {
 #Lambda function
 resource "aws_lambda_function" "this" {
 
-  count            = var.create_lambda
   function_name    = var.function_name
   handler          = "index.lambda_handler"
   runtime          = var.runtime
@@ -59,8 +58,7 @@ resource "aws_lambda_function" "this" {
   timeout          = "30"
 
   dynamic "environment" {
-    for_each = [merge({ sns_topic_arn = var.aws_sns_topic.sns_topic.arn }, var.function_env)]
-
+    for_each = [merge({ sns_topic_arn = aws_sns_topic.sns_topic.arn }, var.function_env)]
     content {
       variables = environment.value
     }

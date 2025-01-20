@@ -1,10 +1,4 @@
 #Lambda function
-variable "create_lambda" {
-  type        = bool
-  default     = false
-  description = "whether to create lambda"
-}
-
 variable "function_name" {
   description = "The name of the lambda function"
   type        = string
