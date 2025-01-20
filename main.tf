@@ -82,7 +82,8 @@ data "template_file" "apigw_oas" {
   template = file("${path.module}/openapi-template.json")
 
   vars = {
-    lambda_arn = aws_lambda_function.this.arn
+    lambda_function_arn = aws_lambda_function.this.arn
+    region              = "us-east-1"
   }
 }
 
