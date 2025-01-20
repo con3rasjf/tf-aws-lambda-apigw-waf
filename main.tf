@@ -1,7 +1,3 @@
-locals {
-  filename = "${path.module}/payload.zip"
-}
-
 #IAM role para la Lambda
 resource "aws_iam_role" "lambda_role" {
   name = "${var.function_name}-role"
@@ -45,13 +41,20 @@ resource "aws_iam_role_policy" "lambda_policy" {
   })
 }
 
+data "archive_file" "lambda" {
+  type        = "zip"
+  source_file = "index.py"
+  output_path = "payload.zip"
+}
+
 #Lambda function
 resource "aws_lambda_function" "this" {
 
   function_name    = var.function_name
   handler          = "index.lambda_handler"
   runtime          = var.runtime
-  source_code_hash = filebase64sha256(local.filename)
+  filename         = "payload.zip"
+  source_code_hash = data.archive_file.lambda.output_base64sha256
   role             = aws_iam_role.lambda_role.arn
   description      = var.description
   memory_size      = var.memory_size
