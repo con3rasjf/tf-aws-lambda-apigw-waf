@@ -50,7 +50,7 @@ variable "rate_limit" {
 
 #SNS
 variable "email_receiver" {
-  description = "Email addresses "
-  type        = list(string)
-  default     = [""]
+  description = "Email address "
+  type        = string
+  default     = ""
 }
