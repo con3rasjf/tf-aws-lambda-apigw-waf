@@ -1,12 +1,6 @@
 locals {
-  filename = data.archive_file.dummy.output_path
+  filename = "${path.module}/payload.zip"
 }
-
-data "archive_file" "dummy" {
-  type        = "zip"
-  output_path = "${path.module}/payload.zip"
-}
-
 
 #IAM role para la Lambda
 resource "aws_iam_role" "lambda_role" {
